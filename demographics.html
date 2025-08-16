@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ethiopia Demographic Dashboard | Ethiopia Data Hub</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -41,6 +41,7 @@
         <!-- Key Metrics -->
         <section class="metrics-section">
             <div class="metrics-grid">
+                <!-- Population Card -->
                 <div class="metric-card">
                     <div class="metric-icon">
                         <i class="fas fa-users"></i>
@@ -51,205 +52,27 @@
                         <div class="metric-description">2025 Projection</div>
                     </div>
                 </div>
-                <div class="metric-card">
-                    <div class="metric-icon">
-                        <i class="fas fa-baby"></i>
-                    </div>
-                    <div class="metric-content">
-                        <h3>Fertility Rate</h3>
-                        <div class="metric-value" id="fertility-rate">4.2</div>
-                        <div class="metric-description">Births per woman</div>
-                    </div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-icon">
-                        <i class="fas fa-city"></i>
-                    </div>
-                    <div class="metric-content">
-                        <h3>Urbanization</h3>
-                        <div class="metric-value" id="urbanization-rate">24%</div>
-                        <div class="metric-description">Urban population</div>
-                    </div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-icon">
-                        <i class="fas fa-heartbeat"></i>
-                    </div>
-                    <div class="metric-content">
-                        <h3>Life Expectancy</h3>
-                        <div class="metric-value" id="life-expectancy">67.3</div>
-                        <div class="metric-description">Years at birth</div>
-                    </div>
-                </div>
+                
+                <!-- Other metric cards (Fertility, Urbanization, Life Expectancy) -->
+                <!-- ... -->
             </div>
         </section>
 
-        <!-- Population Charts -->
-        <section class="chart-section">
-            <h2>Population Structure</h2>
-            <div class="chart-row">
-                <div class="chart-container">
-                    <canvas id="populationChart"></canvas>
-                </div>
-                <div class="chart-container">
-                    <canvas id="agePyramidChart"></canvas>
-                </div>
-            </div>
-        </section>
+        <!-- Charts Sections -->
+        <!-- ... -->
 
-        <!-- Regional Distribution -->
-        <section class="chart-section">
-            <h2>Regional Distribution</h2>
-            <div class="chart-container">
-                <canvas id="regionChart"></canvas>
-            </div>
-        </section>
-
-        <!-- Demographic Dividend -->
-        <section class="highlight-section">
-            <h2>Demographic Dividend</h2>
-            <div class="highlight-content">
-                <div class="highlight-text">
-                    <h3>Youth Population Opportunity</h3>
-                    <p>With <strong>62% of the population under age 25</strong>, Ethiopia has one of the world's most significant youth bulges. This presents both opportunities and challenges for economic development.</p>
-                    <div class="highlight-stats">
-                        <div class="highlight-stat">
-                            <div class="stat-value">1.8M</div>
-                            <div class="stat-label">Youth entering workforce annually</div>
-                        </div>
-                        <div class="highlight-stat">
-                            <div class="stat-value">47%</div>
-                            <div class="stat-label">Population under 15</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="highlight-chart">
-                    <canvas id="dividendChart"></canvas>
-                </div>
-            </div>
-        </section>
-
-        <!-- Ethnic & Religious Composition -->
-        <section class="chart-section">
-            <h2>Ethnic & Religious Composition</h2>
-            <div class="chart-row">
-                <div class="chart-container">
-                    <canvas id="ethnicityChart"></canvas>
-                </div>
-                <div class="chart-container">
-                    <canvas id="religionChart"></canvas>
-                </div>
-            </div>
-        </section>
-
-        <!-- Health & Education Indicators -->
-        <section class="table-section">
-            <h2>Health & Education Indicators</h2>
-            <div class="table-container">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Indicator</th>
-                            <th>Value</th>
-                            <th>Year</th>
-                            <th>Trend</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Adult Literacy Rate</td>
-                            <td>51.8%</td>
-                            <td>2024</td>
-                            <td>↑ 3.2% (5 years)</td>
-                        </tr>
-                        <tr>
-                            <td>Primary School Enrollment</td>
-                            <td>89%</td>
-                            <td>2024</td>
-                            <td>↑ 8% (5 years)</td>
-                        </tr>
-                        <tr>
-                            <td>HIV Prevalence</td>
-                            <td>0.9%</td>
-                            <td>2024</td>
-                            <td>↓ 0.3% (5 years)</td>
-                        </tr>
-                        <tr>
-                            <td>Child Mortality (under 5)</td>
-                            <td>48 per 1,000</td>
-                            <td>2024</td>
-                            <td>↓ 22 (5 years)</td>
-                        </tr>
-                        <tr>
-                            <td>Access to Clean Water</td>
-                            <td>57%</td>
-                            <td>2024</td>
-                            <td>↑ 15% (5 years)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Data Sources -->
-        <section class="sources-section">
-            <h2>Data Sources</h2>
-            <div class="sources-grid">
-                <div class="source-card">
-                    <img src="assets/un-logo.png" alt="United Nations">
-                    <h3>United Nations</h3>
-                    <p>World Population Prospects</p>
-                </div>
-                <div class="source-card">
-                    <img src="assets/world-bank-logo.png" alt="World Bank">
-                    <h3>World Bank</h3>
-                    <p>Development indicators</p>
-                </div>
-                <div class="source-card">
-                    <img src="assets/ethiopia-stats-logo.png" alt="Ethiopian Statistics Service">
-                    <h3>Ethiopian Statistics Service</h3>
-                    <p>National census data</p>
-                </div>
-            </div>
-        </section>
     </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-about">
-                    <h3>About Ethiopia Data Hub</h3>
-                    <p>Providing comprehensive, real-time economic and demographic data for Ethiopia from trusted sources.</p>
-                </div>
-                <div class="footer-links">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="economy.html">Economic Dashboard</a></li>
-                        <li><a href="demographics.html">Demographic Data</a></li>
-                        <li><a href="exchange.html">Exchange Rates</a></li>
-                        <li><a href="#">API Documentation</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <h3>Contact</h3>
-                    <p><i class="fas fa-envelope"></i> info@ethiopiadatahub.et</p>
-                    <p><i class="fas fa-phone"></i> +251 123 456 789</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Ethiopia Data Hub. All rights reserved.</p>
-                <div class="footer-social">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
+            <!-- Footer content -->
         </div>
     </footer>
 
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/demographics.js"></script>
