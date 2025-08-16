@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ethiopia Data Hub | Economic & Demographic Dashboard</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">
@@ -32,20 +32,20 @@
     <header class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Ethiopia Economic & Demographic Dashboard</h1>
-                <p>Real-time data and comprehensive analysis of Ethiopia's economic indicators, population statistics, and development metrics.</p>
+                <h1>Ethiopia Data Hub</h1>
+                <p>Real-time economic and demographic indicators for Ethiopia</p>
                 <div class="hero-buttons">
                     <a href="economy.html" class="btn primary-btn">Explore Economy</a>
                     <a href="demographics.html" class="btn secondary-btn">View Demographics</a>
                 </div>
             </div>
             <div class="hero-image">
-                <img src="assets/ethiopia-hero.png" alt="Ethiopia Map with Data Visualization">
+                <img src="assets/ethiopia-map.png" alt="Ethiopia Map with Data Visualization">
             </div>
         </div>
     </header>
 
-    <!-- Quick Stats -->
+    <!-- Quick Stats Section -->
     <section class="quick-stats">
         <div class="container">
             <div class="stat-card">
@@ -54,8 +54,8 @@
                 </div>
                 <div class="stat-content">
                     <h3>Population</h3>
-                    <div class="stat-value" id="population-stat">--</div>
-                    <div class="stat-source">2025 Projection</div>
+                    <div class="stat-value" id="population-stat">126.5M</div>
+                    <div class="stat-source">2024 Estimate</div>
                 </div>
             </div>
             <div class="stat-card">
@@ -64,8 +64,8 @@
                 </div>
                 <div class="stat-content">
                     <h3>GDP Growth</h3>
-                    <div class="stat-value" id="gdp-stat">--</div>
-                    <div class="stat-source">2024 Estimate</div>
+                    <div class="stat-value" id="gdp-stat">7.3%</div>
+                    <div class="stat-source">2024 Projection</div>
                 </div>
             </div>
             <div class="stat-card">
@@ -74,7 +74,7 @@
                 </div>
                 <div class="stat-content">
                     <h3>Inflation</h3>
-                    <div class="stat-value" id="inflation-stat">--</div>
+                    <div class="stat-value" id="inflation-stat">18.0%</div>
                     <div class="stat-source">Latest</div>
                 </div>
             </div>
@@ -84,16 +84,15 @@
                 </div>
                 <div class="stat-content">
                     <h3>Exchange Rate</h3>
-                    <div class="stat-value" id="exchange-stat">--</div>
-                    <div class="stat-source">ETB/USD</div>
+                    <div class="stat-value" id="exchange-stat">56.5 ETB/USD</div>
+                    <div class="stat-source">Official Rate</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Main Content -->
+    <!-- Featured Charts -->
     <main class="container">
-        <!-- Featured Charts -->
         <section class="featured-section">
             <h2>Key Indicators</h2>
             <div class="featured-grid">
@@ -118,11 +117,11 @@
             </div>
         </section>
 
-        <!-- News & Updates -->
+        <!-- News Section -->
         <section class="news-section">
             <h2>Latest Economic News</h2>
             <div class="news-grid" id="news-container">
-                <!-- News items will be loaded via JavaScript -->
+                <!-- News items loaded via JS -->
             </div>
         </section>
 
@@ -133,22 +132,17 @@
                 <div class="source-card">
                     <img src="assets/world-bank-logo.png" alt="World Bank">
                     <h3>World Bank</h3>
-                    <p>Global development data and indicators for Ethiopia</p>
+                    <p>Global development data</p>
                 </div>
                 <div class="source-card">
                     <img src="assets/imf-logo.png" alt="IMF">
                     <h3>International Monetary Fund</h3>
-                    <p>Macroeconomic statistics and forecasts</p>
-                </div>
-                <div class="source-card">
-                    <img src="assets/fao-logo.png" alt="FAO">
-                    <h3>Food and Agriculture Organization</h3>
-                    <p>Agricultural and food security data</p>
+                    <p>Macroeconomic statistics</p>
                 </div>
                 <div class="source-card">
                     <img src="assets/nbe-logo.png" alt="National Bank of Ethiopia">
                     <h3>National Bank of Ethiopia</h3>
-                    <p>Financial and monetary statistics</p>
+                    <p>Financial statistics</p>
                 </div>
             </div>
         </section>
@@ -160,7 +154,7 @@
             <div class="footer-grid">
                 <div class="footer-about">
                     <h3>About Ethiopia Data Hub</h3>
-                    <p>Providing comprehensive, real-time economic and demographic data for Ethiopia from trusted sources.</p>
+                    <p>Providing comprehensive, real-time data for Ethiopia from trusted sources.</p>
                 </div>
                 <div class="footer-links">
                     <h3>Quick Links</h3>
@@ -168,7 +162,6 @@
                         <li><a href="economy.html">Economic Dashboard</a></li>
                         <li><a href="demographics.html">Demographic Data</a></li>
                         <li><a href="exchange.html">Exchange Rates</a></li>
-                        <li><a href="#">API Documentation</a></li>
                     </ul>
                 </div>
                 <div class="footer-contact">
@@ -192,5 +185,71 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="js/main.js"></script>
+    
+    <!-- Homepage-specific JS -->
+    <script>
+        // Initialize featured charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Chart 1: GDP Growth
+            new Chart(document.getElementById('featuredChart1').getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: ['2020', '2021', '2022', '2023', '2024'],
+                    datasets: [{
+                        label: 'GDP Growth (%)',
+                        data: [6.1, 5.7, 5.6, 6.2, 7.3],
+                        borderColor: '#078C03',
+                        backgroundColor: 'rgba(7, 140, 3, 0.1)',
+                        fill: true
+                    }]
+                }
+            });
+
+            // Chart 2: Population
+            new Chart(document.getElementById('featuredChart2').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['2020', '2021', '2022', '2023', '2024'],
+                    datasets: [{
+                        label: 'Population (millions)',
+                        data: [114.9, 117.6, 120.3, 123.4, 126.5],
+                        backgroundColor: '#ED1C24'
+                    }]
+                }
+            });
+
+            // Chart 3: Inflation
+            new Chart(document.getElementById('featuredChart3').getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: ['2020', '2021', '2022', '2023', '2024'],
+                    datasets: [{
+                        label: 'Inflation (%)',
+                        data: [19.9, 26.4, 34.0, 28.0, 18.0],
+                        borderColor: '#FCDD09',
+                        backgroundColor: 'rgba(252, 221, 9, 0.1)',
+                        fill: true
+                    }]
+                }
+            });
+
+            // Fetch news (mock data)
+            const newsContainer = document.getElementById('news-container');
+            newsContainer.innerHTML = `
+                <div class="news-item">
+                    <div class="news-image">
+                        <img src="assets/news1.jpg" alt="Economic Growth">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">July 15, 2024</div>
+                        <h3 class="news-title">Ethiopia's Economy Shows Strong Growth</h3>
+                        <p class="news-excerpt">GDP grows by 7.5% in Q2 2024 according to NBE reports.</p>
+                        <a href="#" class="news-link">Read more <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Additional news items -->
+            `;
+        });
+    </script>
 </body>
 </html>
