@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethiopia Economic Dashboard | Ethiopia Data Hub</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/ethiopia-flag.png" alt="Ethiopia Flag" class="flag-icon">
+                <span>Ethiopia Data Hub</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="economy.html" class="active"><i class="fas fa-chart-line"></i> Economy</a>
+                <a href="demographics.html"><i class="fas fa-users"></i> Demographics</a>
+                <a href="exchange.html"><i class="fas fa-exchange-alt"></i> Exchange Rates</a>
+                <a href="#" id="data-update-btn"><i class="fas fa-sync-alt"></i> Update Data</a>
+            </div>
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1>Economic Dashboard</h1>
+            <p>Comprehensive economic indicators and sector performance metrics for Ethiopia</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Key Metrics -->
+        <section class="metrics-section">
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="metric-content">
+                        <h3>GDP Growth</h3>
+                        <div class="metric-value" id="gdp-growth">7.3%</div>
+                        <div class="metric-description">2024 Annual Growth Rate</div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <div class="metric-content">
+                        <h3>Inflation</h3>
+                        <div class="metric-value" id="inflation-rate">18.0%</div>
+                        <div class="metric-description">Consumer Price Index</div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="metric-content">
+                        <h3>Interest Rate</h3>
+                        <div class="metric-value" id="interest-rate">8.0%</div>
+                        <div class="metric-description">Central Bank Rate</div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="metric-content">
+                        <h3>Unemployment</h3>
+                        <div class="metric-value" id="unemployment-rate">3.4%</div>
+                        <div class="metric-description">National Rate</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GDP Section -->
+        <section class="chart-section">
+            <h2>GDP Performance</h2>
+            <div class="chart-row">
+                <div class="chart-container">
+                    <canvas id="gdpChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="gdpSectorChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fiscal Indicators -->
+        <section class="chart-section">
+            <h2>Fiscal Indicators</h2>
+            <div class="chart-row">
+                <div class="chart-container">
+                    <canvas id="debtChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="budgetChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trade & Investment -->
+        <section class="chart-section">
+            <h2>Trade & Investment</h2>
+            <div class="chart-row">
+                <div class="chart-container">
+                    <canvas id="tradeChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <canvas id="fdiChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sector Performance -->
+        <section class="table-section">
+            <h2>Sector Performance (2024)</h2>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Sector</th>
+                            <th>Growth Rate</th>
+                            <th>GDP Contribution</th>
+                            <th>Employment</th>
+                            <th>Key Indicators</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Agriculture</td>
+                            <td>4.5%</td>
+                            <td>35.2%</td>
+                            <td>68%</td>
+                            <td>Coffee exports: $1.42B</td>
+                        </tr>
+                        <tr>
+                            <td>Industry</td>
+                            <td>9.2%</td>
+                            <td>25.8%</td>
+                            <td>12%</td>
+                            <td>Manufacturing growth: 8.7%</td>
+                        </tr>
+                        <tr>
+                            <td>Services</td>
+                            <td>8.1%</td>
+                            <td>39.0%</td>
+                            <td>20%</td>
+                            <td>ICT growth: 15.3%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Data Sources -->
+        <section class="sources-section">
+            <h2>Data Sources</h2>
+            <div class="sources-grid">
+                <div class="source-card">
+                    <img src="assets/world-bank-logo.png" alt="World Bank">
+                    <h3>World Bank</h3>
+                    <p>Global development data and indicators</p>
+                </div>
+                <div class="source-card">
+                    <img src="assets/imf-logo.png" alt="IMF">
+                    <h3>International Monetary Fund</h3>
+                    <p>Macroeconomic statistics and forecasts</p>
+                </div>
+                <div class="source-card">
+                    <img src="assets/nbe-logo.png" alt="National Bank of Ethiopia">
+                    <h3>National Bank of Ethiopia</h3>
+                    <p>Financial and monetary statistics</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h3>About Ethiopia Data Hub</h3>
+                    <p>Providing comprehensive, real-time economic and demographic data for Ethiopia from trusted sources.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="economy.html">Economic Dashboard</a></li>
+                        <li><a href="demographics.html">Demographic Data</a></li>
+                        <li><a href="exchange.html">Exchange Rates</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> info@ethiopiadatahub.et</p>
+                    <p><i class="fas fa-phone"></i> +251 123 456 789</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ethiopia Data Hub. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/economy.js"></script>
+</body>
+</html>
