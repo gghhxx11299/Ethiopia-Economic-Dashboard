@@ -3,382 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ethiopia Real-Time Data Hub</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <style>
-        :root {
-            --primary: #2c3e50;
-            --secondary: #2980b9;
-            --accent: #e74c3c;
-            --light-bg: #f8f9fa;
-            --border: #e0e0e0;
-            --text: #333;
-            --text-light: #777;
-        }
-        body {
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            background-color: white;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        header {
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-        h1 {
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-        .subtitle {
-            color: var(--text-light);
-            font-size: 1.1rem;
-        }
-        .last-updated {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            text-align: right;
-            margin-top: 10px;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
-        }
-        .card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        .card-header {
-            padding: 15px 20px;
-            background: var(--light-bg);
-            border-bottom: 1px solid var(--border);
-        }
-        .card-title {
-            font-weight: 600;
-            color: var(--primary);
-            margin: 0;
-        }
-        .card-body {
-            padding: 20px;
-        }
-        .metric {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 10px 0;
-        }
-        .metric-label {
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-        .chart-container {
-            height: 250px;
-            margin-top: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 0.9rem;
-        }
-        th {
-            background: var(--light-bg);
-            text-align: left;
-            padding: 12px;
-            font-weight: 600;
-        }
-        td {
-            padding: 10px 12px;
-            border-bottom: 1px solid var(--border);
-        }
-        tr:last-child td {
-            border-bottom: none;
-        }
-        .positive {
-            color: #27ae60;
-        }
-        .negative {
-            color: var(--accent);
-        }
-        .loading {
-            color: var(--text-light);
-            font-style: italic;
-        }
-        footer {
-            border-top: 1px solid var(--border);
-            margin-top: 50px;
-            padding-top: 20px;
-            text-align: center;
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-        @media (max-width: 768px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <title>Ethiopia Data Hub | Economic & Demographic Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Ethiopia Real-Time Data Hub</h1>
-            <p class="subtitle">Live economic and demographic indicators from official sources</p>
-            <div class="last-updated" id="last-updated">Loading data...</div>
-        </header>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/ethiopia-flag.png" alt="Ethiopia Flag" class="flag-icon">
+                <span>Ethiopia Data Hub</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+                <a href="economy.html"><i class="fas fa-chart-line"></i> Economy</a>
+                <a href="demographics.html"><i class="fas fa-users"></i> Demographics</a>
+                <a href="exchange.html"><i class="fas fa-exchange-alt"></i> Exchange Rates</a>
+                <a href="#" id="data-update-btn"><i class="fas fa-sync-alt"></i> Update Data</a>
+            </div>
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
 
-        <!-- ECONOMIC INDICATORS -->
-        <section>
-            <h2>Economic Indicators</h2>
-            <div class="grid">
-                <!-- GDP Card -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">GDP Growth</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="metric" id="gdp-growth">--%</div>
-                        <div class="metric-label">Annual growth rate</div>
-                        <div class="chart-container">
-                            <canvas id="gdpChart"></canvas>
-                        </div>
-                        <div class="last-updated">Source: <span id="gdp-source">World Bank</span></div>
-                    </div>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Ethiopia Economic & Demographic Dashboard</h1>
+                <p>Real-time data and comprehensive analysis of Ethiopia's economic indicators, population statistics, and development metrics.</p>
+                <div class="hero-buttons">
+                    <a href="economy.html" class="btn primary-btn">Explore Economy</a>
+                    <a href="demographics.html" class="btn secondary-btn">View Demographics</a>
                 </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/ethiopia-hero.png" alt="Ethiopia Map with Data Visualization">
+            </div>
+        </div>
+    </header>
 
-                <!-- Inflation Card -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Inflation Rate</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="metric" id="inflation-rate">--%</div>
-                        <div class="metric-label">Consumer price index</div>
-                        <div class="chart-container">
-                            <canvas id="inflationChart"></canvas>
-                        </div>
-                        <div class="last-updated">Source: <span id="inflation-source">National Bank of Ethiopia</span></div>
-                    </div>
+    <!-- Quick Stats -->
+    <section class="quick-stats">
+        <div class="container">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-globe-africa"></i>
                 </div>
+                <div class="stat-content">
+                    <h3>Population</h3>
+                    <div class="stat-value" id="population-stat">--</div>
+                    <div class="stat-source">2025 Projection</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>GDP Growth</h3>
+                    <div class="stat-value" id="gdp-stat">--</div>
+                    <div class="stat-source">2024 Estimate</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>Inflation</h3>
+                    <div class="stat-value" id="inflation-stat">--</div>
+                    <div class="stat-source">Latest</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>Exchange Rate</h3>
+                    <div class="stat-value" id="exchange-stat">--</div>
+                    <div class="stat-source">ETB/USD</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Exchange Rate Card -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Exchange Rate</h3>
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Featured Charts -->
+        <section class="featured-section">
+            <h2>Key Indicators</h2>
+            <div class="featured-grid">
+                <div class="featured-card">
+                    <div class="chart-container">
+                        <canvas id="featuredChart1"></canvas>
                     </div>
-                    <div class="card-body">
-                        <div class="metric" id="exchange-rate">-- ETB/USD</div>
-                        <div class="metric-label">Official rate</div>
-                        <div class="chart-container">
-                            <canvas id="exchangeChart"></canvas>
-                        </div>
-                        <div class="last-updated">Source: <span id="exchange-source">National Bank of Ethiopia</span></div>
+                    <h3>GDP Growth Trend</h3>
+                </div>
+                <div class="featured-card">
+                    <div class="chart-container">
+                        <canvas id="featuredChart2"></canvas>
                     </div>
+                    <h3>Population Growth</h3>
+                </div>
+                <div class="featured-card">
+                    <div class="chart-container">
+                        <canvas id="featuredChart3"></canvas>
+                    </div>
+                    <h3>Inflation Rate</h3>
                 </div>
             </div>
         </section>
 
-        <!-- DEMOGRAPHIC INDICATORS -->
-        <section>
-            <h2>Demographic Indicators</h2>
-            <div class="grid">
-                <!-- Population Card -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Population</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="metric" id="population">--M</div>
-                        <div class="metric-label">Estimated total population</div>
-                        <div class="chart-container">
-                            <canvas id="populationChart"></canvas>
-                        </div>
-                        <div class="last-updated">Source: <span id="population-source">UN World Population Prospects</span></div>
-                    </div>
-                </div>
-
-                <!-- Fertility Card -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Fertility Rate</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="metric" id="fertility">--</div>
-                        <div class="metric-label">Births per woman</div>
-                        <div class="chart-container">
-                            <canvas id="fertilityChart"></canvas>
-                        </div>
-                        <div class="last-updated">Source: <span id="fertility-source">World Bank</span></div>
-                    </div>
-                </div>
-
-                <!-- Urbanization Card -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Urbanization</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="metric" id="urbanization">--%</div>
-                        <div class="metric-label">Urban population</div>
-                        <div class="chart-container">
-                            <canvas id="urbanChart"></canvas>
-                        </div>
-                        <div class="last-updated">Source: <span id="urban-source">World Bank</span></div>
-                    </div>
-                </div>
+        <!-- News & Updates -->
+        <section class="news-section">
+            <h2>Latest Economic News</h2>
+            <div class="news-grid" id="news-container">
+                <!-- News items will be loaded via JavaScript -->
             </div>
         </section>
 
-        <footer>
-            <p>Data updates automatically from official sources. Last refresh: <span id="footer-update-time">--</span></p>
-            <p>© 2023 Ethiopia Data Hub | All data belongs to original sources</p>
-        </footer>
-    </div>
+        <!-- Data Sources -->
+        <section class="sources-section">
+            <h2>Data Sources</h2>
+            <div class="sources-grid">
+                <div class="source-card">
+                    <img src="assets/world-bank-logo.png" alt="World Bank">
+                    <h3>World Bank</h3>
+                    <p>Global development data and indicators for Ethiopia</p>
+                </div>
+                <div class="source-card">
+                    <img src="assets/imf-logo.png" alt="IMF">
+                    <h3>International Monetary Fund</h3>
+                    <p>Macroeconomic statistics and forecasts</p>
+                </div>
+                <div class="source-card">
+                    <img src="assets/fao-logo.png" alt="FAO">
+                    <h3>Food and Agriculture Organization</h3>
+                    <p>Agricultural and food security data</p>
+                </div>
+                <div class="source-card">
+                    <img src="assets/nbe-logo.png" alt="National Bank of Ethiopia">
+                    <h3>National Bank of Ethiopia</h3>
+                    <p>Financial and monetary statistics</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    <script>
-        // API Endpoints (using World Bank, NBE, and UN APIs)
-        const API_ENDPOINTS = {
-            gdp: 'https://api.worldbank.org/v2/country/ETH/indicator/NY.GDP.MKTP.KD.ZG?format=json&date=2023:2023',
-            inflation: 'https://api.worldbank.org/v2/country/ETH/indicator/FP.CPI.TOTL.ZG?format=json&date=2023:2023',
-            population: 'https://api.worldbank.org/v2/country/ETH/indicator/SP.POP.TOTL?format=json&date=2023:2023',
-            fertility: 'https://api.worldbank.org/v2/country/ETH/indicator/SP.DYN.TFRT.IN?format=json&date=2023:2023',
-            urbanization: 'https://api.worldbank.org/v2/country/ETH/indicator/SP.URB.TOTL.IN.ZS?format=json&date=2023:2023',
-            exchange: 'https://api.nbe.gov.et/api/exchange-rate/latest' // Example - may require API key
-        };
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h3>About Ethiopia Data Hub</h3>
+                    <p>Providing comprehensive, real-time economic and demographic data for Ethiopia from trusted sources.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="economy.html">Economic Dashboard</a></li>
+                        <li><a href="demographics.html">Demographic Data</a></li>
+                        <li><a href="exchange.html">Exchange Rates</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-envelope"></i> info@ethiopiadatahub.et</p>
+                    <p><i class="fas fa-phone"></i> +251 123 456 789</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ethiopia Data Hub. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-        // Fallback data if APIs fail (from last known values)
-        const FALLBACK_DATA = {
-            gdp: { value: 6.2, year: 2023, source: "World Bank 2023" },
-            inflation: { value: 28.0, year: 2023, source: "NBE 2023" },
-            population: { value: 126.5, year: 2023, source: "UN 2023" },
-            fertility: { value: 4.2, year: 2023, source: "World Bank 2023" },
-            urbanization: { value: 22, year: 2023, source: "World Bank 2023" },
-            exchange: { value: 56.5, year: 2023, source: "NBE 2023" }
-        };
-
-        // Initialize charts
-        const charts = {
-            gdp: initChart('gdpChart', 'GDP Growth (%)', ['2020', '2021', '2022', '2023'], []),
-            inflation: initChart('inflationChart', 'Inflation Rate (%)', ['2020', '2021', '2022', '2023'], []),
-            exchange: initChart('exchangeChart', 'ETB/USD', ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'], []),
-            population: initChart('populationChart', 'Population (millions)', ['2015', '2020', '2021', '2022', '2023'], []),
-            fertility: initChart('fertilityChart', 'Fertility Rate', ['2015', '2020', '2021', '2022', '2023'], []),
-            urban: initChart('urbanChart', 'Urban Population (%)', ['2015', '2020', '2021', '2022', '2023'], [])
-        };
-
-        // Fetch all data on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            fetchAllData();
-            // Refresh data every 6 hours
-            setInterval(fetchAllData, 6 * 60 * 60 * 1000);
-        });
-
-        // Initialize a Chart.js chart
-        function initChart(id, label, labels, data) {
-            const ctx = document.getElementById(id).getContext('2d');
-            return new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: label,
-                        data: data,
-                        borderColor: '#2980b9',
-                        backgroundColor: 'rgba(41, 128, 185, 0.1)',
-                        borderWidth: 2,
-                        tension: 0.3,
-                        fill: true
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    }
-                }
-            });
-        }
-
-        // Fetch data from all APIs
-        async function fetchAllData() {
-            const now = new Date();
-            document.getElementById('last-updated').textContent = `Last updated: ${now.toLocaleString()}`;
-            document.getElementById('footer-update-time').textContent = now.toLocaleString();
-
-            try {
-                // GDP Data
-                const gdpResponse = await axios.get(API_ENDPOINTS.gdp);
-                const gdpData = gdpResponse.data[1]?.[0]?.value || FALLBACK_DATA.gdp.value;
-                document.getElementById('gdp-growth').textContent = `${gdpData}%`;
-                charts.gdp.data.datasets[0].data = [6.1, 5.7, 5.6, gdpData];
-                charts.gdp.update();
-                document.getElementById('gdp-source').textContent = gdpResponse.data[1]?.[0]?.sourceOrg || FALLBACK_DATA.gdp.source;
-
-                // Inflation Data
-                const inflationResponse = await axios.get(API_ENDPOINTS.inflation);
-                const inflationData = inflationResponse.data[1]?.[0]?.value || FALLBACK_DATA.inflation.value;
-                document.getElementById('inflation-rate').textContent = `${inflationData}%`;
-                charts.inflation.data.datasets[0].data = [19.9, 26.4, 34.0, inflationData];
-                charts.inflation.update();
-                document.getElementById('inflation-source').textContent = inflationResponse.data[1]?.[0]?.sourceOrg || FALLBACK_DATA.inflation.source;
-
-                // Population Data
-                const populationResponse = await axios.get(API_ENDPOINTS.population);
-                const populationData = (populationResponse.data[1]?.[0]?.value / 1000000).toFixed(1) || FALLBACK_DATA.population.value;
-                document.getElementById('population').textContent = `${populationData}M`;
-                charts.population.data.datasets[0].data = [99.4, 114.9, 117.6, 120.3, populationData];
-                charts.population.update();
-                document.getElementById('population-source').textContent = populationResponse.data[1]?.[0]?.sourceOrg || FALLBACK_DATA.population.source;
-
-                // Fertility Data
-                const fertilityResponse = await axios.get(API_ENDPOINTS.fertility);
-                const fertilityData = fertilityResponse.data[1]?.[0]?.value || FALLBACK_DATA.fertility.value;
-                document.getElementById('fertility').textContent = fertilityData;
-                charts.fertility.data.datasets[0].data = [4.6, 4.4, 4.3, 4.2, fertilityData];
-                charts.fertility.update();
-                document.getElementById('fertility-source').textContent = fertilityResponse.data[1]?.[0]?.sourceOrg || FALLBACK_DATA.fertility.source;
-
-                // Urbanization Data
-                const urbanResponse = await axios.get(API_ENDPOINTS.urbanization);
-                const urbanData = urbanResponse.data[1]?.[0]?.value || FALLBACK_DATA.urbanization.value;
-                document.getElementById('urbanization').textContent = `${urbanData}%`;
-                charts.urban.data.datasets[0].data = [19.5, 21.3, 21.7, 22.1, urbanData];
-                charts.urban.update();
-                document.getElementById('urban-source').textContent = urbanResponse.data[1]?.[0]?.sourceOrg || FALLBACK_DATA.urbanization.source;
-
-                // Exchange Rate Data (using fallback as NBE API typically requires auth)
-                document.getElementById('exchange-rate').textContent = `${FALLBACK_DATA.exchange.value} ETB/USD`;
-                charts.exchange.data.datasets[0].data = [54.1, 54.5, 55.2, 55.8, 56.1, 56.3, FALLBACK_DATA.exchange.value];
-                charts.exchange.update();
-                document.getElementById('exchange-source').textContent = FALLBACK_DATA.exchange.source;
-
-            } catch (error) {
-                console.error("Error fetching data:", error);
-                // Use fallback data if API fails
-                document.getElementById('gdp-growth').textContent = `${FALLBACK_DATA.gdp.value}%`;
-                document.getElementById('inflation-rate').textContent = `${FALLBACK_DATA.inflation.value}%`;
-                document.getElementById('population').textContent = `${FALLBACK_DATA.population.value}M`;
-                document.getElementById('fertility').textContent = FALLBACK_DATA.fertility.value;
-                document.getElementById('urbanization').textContent = `${FALLBACK_DATA.urbanization.value}%`;
-                document.getElementById('exchange-rate').textContent = `${FALLBACK_DATA.exchange.value} ETB/USD`;
-            }
-        }
-    </script>
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
